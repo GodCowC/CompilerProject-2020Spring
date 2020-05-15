@@ -163,13 +163,20 @@ void IRPrinter::visit(Ref<const Var> op) {
     if (print_arg) {
     oss << op->type() << " (&";
     oss << op->name << ")";
+        if (op->shape.size() == 1 && op->shape[0] == 1)
+        {
+            return;
+        }
         for (size_t i = 0; i < op->shape.size(); ++i) {
             oss << "[";
             oss << op->shape[i];
             oss << "]";
             }
     } else {oss << op->name;
-    
+    if (op->shape.size() == 1 && op->shape[0] == 1)
+        {
+            return;
+        }
         for (size_t i = 0; i < op->args.size(); ++i) {
 oss << "[";
             op->args[i].visit_expr(this);
