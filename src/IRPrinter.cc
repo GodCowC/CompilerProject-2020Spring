@@ -169,14 +169,12 @@ void IRPrinter::visit(Ref<const Var> op) {
             oss << "]";
             }
     } else {oss << op->name;
-    oss << "[";
+    
         for (size_t i = 0; i < op->args.size(); ++i) {
+oss << "[";
             op->args[i].visit_expr(this);
-            if (i < op->args.size() - 1) {
-                oss << ", ";
-            }
-        }
         oss << "]";
+        }
     }
 }
 
